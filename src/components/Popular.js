@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import api from '../utils/api';
+import Loading from './Loading';
+var api = require('../utils/api');
 
  function SelectLanguage( props ) {
   var languages = ['ALL', 'JavsScript', 'Ruby', 'Java', 'Css', 'Python'];
@@ -71,7 +72,7 @@ class Popular extends React.Component {
         repos: null
       }
     })
-    api.fecthPopularRepos( lang )
+    api.fetchPopularRepos( lang )
       .then( ( repos ) => {
       this.setState( () => {
         return {
@@ -90,7 +91,7 @@ class Popular extends React.Component {
         />
         { this.state.repos !== null
           ? <RepoGrid repos={ this.state.repos }/>
-          : 'loading' }
+          : <Loading speed={ 200 } text="Making request"/> }
 
       </div>
     )
